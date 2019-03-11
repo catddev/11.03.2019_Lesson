@@ -102,14 +102,18 @@ char *replaceVowels(char*str) {
 		if (vowels(*p_str))
 		{
 			_itoa_s(*p_str - 'a' + 1 , buf, 10); // например my example: #y = 121 - 97(ASCII y - ASCII a) +1(алфавит начинается не с нуля, а с 1)=25;
-			strcat_s(tmp, buf); // s-версия нельзя для динамической памяти, только с заданным размером
+			if (p_str-str == 0)
+				strcpy(tmp, buf);
+			else
+				strcat_s(tmp, buf); // s-версия нельзя для динамической памяти, только с заданным размером
+
 			p_str++;
 			p_tmp += strlen(buf);
 		}
 		else
 		{
 			*p_tmp = *p_str;
-			*(p_tmp + 1) = '\0';
+			*(p_tmp + 1) = '\0'; //why?
 			p_tmp++;
 			p_str++;
 		}
